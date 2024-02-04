@@ -116,6 +116,7 @@ $num = $result->rowCount();
             window.location.href = "proses-ubah.php?ID=" + id + "&NamaKategori=" +namakategori
         }
     }
+    
 </script>
 
 </body>
