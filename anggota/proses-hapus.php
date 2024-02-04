@@ -10,7 +10,7 @@ if($_GET["ID"]) {
     $anggota->ID = $_GET['ID'];
 
     if($anggota->delete() == true){
-        header("Location: http://localhost:800/perpus/anggota/index.php");
+        header("Location: http://localhost/perpus/anggota/index.php");
     }else {
         echo $exception->getMessage();
     }

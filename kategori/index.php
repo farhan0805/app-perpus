@@ -1,22 +1,22 @@
 <?php
 include '../config/layout.php';
 include '../config/database.php';
-include '../object/Anggota.php';
+include '../object/Kategori.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$anggota = new Anggota($db);
+$kategori = new Kategori($db);
 
-// ambil data anggota
-$result = $anggota->readAll();
+// ambil data kategori
+$result = $kategori->readAll();
 $num = $result->rowCount();
 ?>
 
 <div class="p-4 sm:ml-64">
     <div class="p-4 mt-14">
-        <h2 class="text-4xl font-extrabold dark:text-white">Data Anggota</h2>
-        <a href="form-tambah.php"
+        <h2 class="text-4xl font-extrabold dark:text-white">Data Kategori</h2>
+        <a onclick="addKategori()"
             class="block mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 23" fill="currentColor" class="w-3.5 h-3.5 me-2">
                 <path fill-rule="evenodd"
@@ -36,13 +36,7 @@ $num = $result->rowCount();
                                 No.
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nama Lengkap
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Alamat
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                No. Telepon
+                                Nama Kategori
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Aksi
@@ -61,17 +55,11 @@ $num = $result->rowCount();
                                     <?= $no ?>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <?= $NamaLengkap ?>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?= $Alamat ?>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?= $NoTelp ?>
+                                    <?= $NamaKategori ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="inline-flex rounded-md shadow-sm" role="group">
-                                        <a href="form-ubah.php?ID=<?=$ID?>">
+                                        <a onclick="ubahKategori(<?= $ID ?>)">
                                             <button type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
                                                 Ubah
                                             </button>
@@ -96,11 +84,36 @@ $num = $result->rowCount();
         ?>
     </div>
 </div>
+
+<form id="form_tambah" action="proses-tambah.php" method="POST">
+    <input type="hiden" id="namakategori" name="namakategori" required="">
+    <button type="button" onclick="addKategori()">Submit</button>
+</form>
+
 <script>
     function confirmDelete(id) {
         var confirmation = confirm("Anda yakin ingin menghapus data?");
         if(confirmation) {
             window.location.href = "proses-hapus.php?ID=" + id
+        }
+    }
+
+    function addKategori() {
+        var namakategori = prompt("Nama Kategori:");
+
+        if (namakategori !== null) {
+            document.getElementById('namakategori').value = namakategori;
+            document.getElementById('form_tambah').submit();
+        }else {
+            alert("Tambah kategori dibatalkan");
+        }
+    }
+
+    function ubahKategori(id) {
+
+        var namakategori = prompt("Nama Kategori:", "<?= $NamaKategori ?>");
+        if(namakategori !== null) {
+            window.location.href = "proses-ubah.php?ID=" + id + "&NamaKategori=" +namakategori
         }
     }
 </script>

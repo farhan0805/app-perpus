@@ -18,7 +18,7 @@ if($_POST) {
     $anggota->update();
     
     if ($anggota->update() == true) {
-        header("Location: http://localhost:800/perpus/anggota/index.php");
+        header("Location: http://localhost/perpus/anggota/index.php");
     }else {
         echo $exception->getMessage();
     }

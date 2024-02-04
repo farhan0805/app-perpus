@@ -1,21 +1,21 @@
 <?php
 include '../config/layout.php';
 include '../config/database.php';
-include '../object/Anggota.php';
+include '../object/Penerbit.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$anggota = new Anggota($db);
+$penerbit = new Penerbit($db);
 
 // ambil data anggota
-$result = $anggota->readAll();
+$result = $penerbit->readAll();
 $num = $result->rowCount();
 ?>
 
 <div class="p-4 sm:ml-64">
     <div class="p-4 mt-14">
-        <h2 class="text-4xl font-extrabold dark:text-white">Data Anggota</h2>
+        <h2 class="text-4xl font-extrabold dark:text-white">Data Penerbit</h2>
         <a href="form-tambah.php"
             class="block mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 23" fill="currentColor" class="w-3.5 h-3.5 me-2">
@@ -61,7 +61,7 @@ $num = $result->rowCount();
                                     <?= $no ?>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <?= $NamaLengkap ?>
+                                    <?= $NamaPenerbit ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <?= $Alamat ?>

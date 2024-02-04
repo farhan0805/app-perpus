@@ -15,7 +15,7 @@ if($_POST) {
     $anggota->TglLahir = $_POST['tgllahir'];
     
     if ($anggota->create() == true) {
-        header("Location: http://localhost:800/perpus/anggota/index.php");
+        header("Location: http://localhost/perpus/anggota/index.php");
     }else {
         echo $exception->getMessage();
     }
