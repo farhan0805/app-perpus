@@ -65,6 +65,7 @@ class Petugas{
         // Execute the query
         if ($result->execute()) {
             return true;
+
         } else {
             return false;
         }
@@ -106,8 +107,31 @@ class Petugas{
             return false;
         }
     }
+
+    function authenticate() {
+        $query = "SELECT * FROM "  . $this->table_name . " WHERE Email = :Email AND Password = :Password";
+
+        $result = $this->conn->prepare($query);
+
+        $this->Email = htmlspecialchars(strip_tags($this->Email));
+        $this->Password = htmlspecialchars(strip_tags($this->Password));
+
+        $result->bindParam( ":Email", $this->Email );
+        $result->bindParam( ":Password", $this->Password);
+
+        $result->execute();
+
+        if($result->rowCount() > 0) {
+            $petugas= $result->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION["namapetugas"] = $petugas["Username"];
+            $_SESSION["rolepetugas"] = $petugas["Role"];
+            $_SESSION["idpetugas"] = $petugas["ID"];
+            $_SESSION["emailpetugas"] = $petugas["Email"];
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 }
-
-
-
