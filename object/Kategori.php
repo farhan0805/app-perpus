@@ -23,8 +23,6 @@ class Kategori
 
         $result = $this->conn->prepare($query);
 
-        $this->NIK = htmlspecialchars(strip_tags($this->NamaKategori));
-
         $result->bindParam(":NamaKategori", $this->NamaKategori);
 
         if ($result->execute()) {

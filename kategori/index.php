@@ -11,6 +11,7 @@ $kategori = new Kategori($db);
 // ambil data kategori
 $result = $kategori->readAll();
 $num = $result->rowCount();
+$NamaKategori = " ";
 ?>
 
 <div class="p-4 sm:ml-64">
@@ -87,7 +88,6 @@ $num = $result->rowCount();
 
 <form id="form_tambah" action="proses-tambah.php" method="POST">
     <input type="hiden" id="namakategori" name="namakategori" required="">
-    <button type="button" onclick="addKategori()">Submit</button>
 </form>
 
 <script>
@@ -101,7 +101,7 @@ $num = $result->rowCount();
     function addKategori() {
         var namakategori = prompt("Nama Kategori:");
 
-        if (namakategori !== null) {
+        if (namakategori != null) {
             document.getElementById('namakategori').value = namakategori;
             document.getElementById('form_tambah').submit();
         }else {
@@ -112,7 +112,7 @@ $num = $result->rowCount();
     function ubahKategori(id) {
 
         var namakategori = prompt("Nama Kategori:", "<?= $NamaKategori ?>");
-        if(namakategori !== null) {
+        if(namakategori != null) {
             window.location.href = "proses-ubah.php?ID=" + id + "&NamaKategori=" +namakategori
         }
     }
